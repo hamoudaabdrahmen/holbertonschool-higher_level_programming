@@ -7,18 +7,18 @@ from models.base import Base
 
 
 class Rectangle(Base):
-    """Rectangle class"""
+    """A representation of a rectangle"""
     def __init__(self, width, height, x=0, y=0, id=None):
-        """Initializes Rectangle"""
-        super().__init__(id)
+        """Initializes the rectangle"""
         self.width = width
         self.height = height
         self.x = x
         self.y = y
+        super().__init__(id)
 
     @property
     def width(self):
-        """getter of width"""
+        """getter od width"""
         return self.__width
 
     @property
@@ -73,18 +73,17 @@ class Rectangle(Base):
         self.__y = value
 
     def area(self):
-        """returns the area value of the Rectangle instance"""
+        """calculates the area of the rectangle"""
         return self.__width * self.__height
 
     def display(self):
-        """prints in stdout the Rectangle instance with the character #"""
-        for i in range(0, self.__y):
-            print()
-        print(((' ' * self.__x) + ('#' * self.__width + '\n')) *
-              self.__height, end="")
+        """print a display of the rectangle"""
+        print(("\n" * self.__y) +
+              "\n".join(((" " * self.__x) + ("#" * self.__width))
+                        for i in range(self.__height)))
 
     def __str__(self):
-        """string representation of the rectangle"""
+        """informal string representation of the rectangle"""
         return "[Rectangle] ({:d}) {:d}/{:d} - {:d}/{:d}".format(self.id,
                                                                  self.__x,
                                                                  self.__y,
@@ -92,19 +91,19 @@ class Rectangle(Base):
                                                                  self.__height)
 
     def update(self, *args, **kwargs):
-        """assigns a key/value argument to attributes"""
-        if args and len(args):
-            for i, elm in enumerate(args):
+        """updates multiple attributes"""
+        if len(args):
+            for i, a in enumerate(args):
                 if i == 0:
-                    self.id = elm
+                    self.id = a
                 elif i == 1:
-                    self.width = elm
+                    self.width = a
                 elif i == 2:
-                    self.height = elm
+                    self.height = a
                 elif i == 3:
-                    self.x = elm
+                    self.x = a
                 elif i == 4:
-                    self.y = elm
+                    self.y = a
         else:
             if "id" in kwargs:
                 self.id = kwargs["id"]
@@ -118,11 +117,11 @@ class Rectangle(Base):
                 self.y = kwargs["y"]
 
     def to_dictionary(self):
-        """returns the dictionary representation of a Rectangle"""
-        rectangle_dict = {}
-        rectangle_dict["id"] = self.id
-        rectangle_dict["width"] = self.width
-        rectangle_dict["height"] = self.height
-        rectangle_dict["x"] = self.x
-        rectangle_dict["y"] = self.y
-        return rectangle_dict
+        """dictionary representation of a Rectangle"""
+        d = {}
+        d["id"] = self.id
+        d["width"] = self.width
+        d["height"] = self.height
+        d["x"] = self.x
+        d["y"] = self.y
+        return d
