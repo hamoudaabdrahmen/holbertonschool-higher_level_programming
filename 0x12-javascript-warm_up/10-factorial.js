@@ -1,5 +1,4 @@
 #!/usr/bin/node
-
 function factorial (nb) {
     if (nb === 1 || isNaN(nb)) {
       return 1;
