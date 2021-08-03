@@ -9,4 +9,3 @@ function factorial (nb) {
   const arg = process.argv[2];
   const fact = factorial(parseInt(arg));
   console.log(fact);
-  
